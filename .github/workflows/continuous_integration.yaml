@@ -1,0 +1,23 @@
+name: Go CI/CD
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+env:
+  GOPROXY: "https://proxy.golang.org"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: '1.19'
+      - uses: actions/checkout@v3
+
+      - name: Run Unit test cases
+        run: go test -v ./...
