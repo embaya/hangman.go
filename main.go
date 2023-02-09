@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
+	"hangman/dictionary"
 	"hangman/hangman"
-	"hangman/hangman/dictionary"
 	"os"
 )
 
@@ -15,7 +15,12 @@ func main() {
 		os.Exit(1)
 	}
 
-	g := hangman.New(8, dictionary.PickWord())
+	g, err := hangman.New(8, dictionary.PickWord())
+	if err != nil {
+		fmt.Printf("Could not start game")
+		os.Exit(1)
+	}
+
 	hangman.DrawWelcome()
 
 	guess := ""
